@@ -1,0 +1,85 @@
+Point-01-#
+#Product:- Red Hat OpenShift.
+
+1-# Cloud services editions
+ - Red Hat OpenShift Service on AWS
+ - Microsoft Azure Red Hat OpenShift
+ - Red Hat OpenShift Dedicated
+ - Red Hat OpenShift on IBM Cloud
+
+2-# Self-managed editions
+ - Red Hat OpenShift Kubernetes Engine
+ - Red Hat OpenShift Container Platform
+ - Red Hat OpenShift Platform Plus
+ 
+3-# Services & add-ons
+ - Red Hat OpenShift AI
+ https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.3
+
+
+https://www.redhat.com/en/resources/openshift-skill-paths-datasheet 
+Point-02-#
+# Red Hat OpenShift AI (Add-ons)
+# Classroom Environment (Prod Env).
+
+1-) Users details:-
+   - Login to VMs/Servers:-
+     student/student - sudo access  
+	 root/redhat 
+	
+   - Login to OCP cluster:-
+     - Token based login via Oauth (Identity Broker)
+	 - Authetication done by IdPs (Identity Providers) - htpasswd 
+	 - admin/redhatocp (Cluster-admin).
+	 - developer/developer (basic user).
+	 - API URL (https://api.clusterName.baseDomain:6443)
+	   As per AI267 LAB - https://api.ocp4.example.com:6443 
+	  oc login -u admin -p redhatocp https://api.ocp4.example.com:6443 
+	  
+	 - Web Console - https://appName-nsName.apps.clusterName.baseDomain
+	   As per AI267 LAB - https://console-openshift-console.apps.ocp4.example.com 
+	   
+	********* Only for LAB hands-on ********* 
+	- Login to workstation as syudent user.
+	- ssh to utility node as lab user from the workstation's terminals.
+	  $ ssh lab@utility 
+	  $ ./wait.sh 
+	  
+	  Open other terminals - 
+	  oc get mc 
+	  oc get mcp 
+	*********
+	  
+2-) Network information:-
+      Network Name          Network Range             Domain 
+  - Classroom Network      172.25.252.0/24          example.com  
+  - Student Network        172.25.250.0/24          lab.example.com 
+  - Cluster Network        192.168.50.0/24          ocp4.example.com 
+  
+3-) VMs/Servers details:-
+   - workstation.lab.example.com - Jump Server 
+   - bastion.lab.example.com     - Act as a router (Which connect Student network to classroom network)
+   - utility.lab.example.com     - Main node (OCP and OpenShift AI)- Connect Student to Cluster network.
+   - ceph.ocp4.example.com       - Object Storage (ODF - External mode)
+   - registry.ocp4.example.com   - All images (base/libs & bins)
+   - master01-03.ocp4.example.com   - OCP/k8s services (Cluster Service)
+   - worker01-03.ocp4.example.com   - End user applications (workbench POD).
+   
+Point-03# 
+Table OF contents.
+Phase-01:-
+Unit-1- Introduction to Red Hat OpenShift AI (RHOAI)
+Unit-2- Date Science Project:-
+      - Data Science Project
+      - workbench
+      - Data Connection (Connectivity toward Object Storage - Object Bucket)
+Unit-3- jupyter Notebooks (Access file like .ipynb)
+Unit-4- Red Hat OpenShift AI Installation (Via Operator HUB/CLI).
+Unit-5- User and resources management (user, groups, RBAC, Managing Resources)
+Unit-6- Custom Notebook Images
+
+
+Pahse-02:-
+Unit-7 Introduction to Machine Learning
+to 
+Unit-14 Controlling Pipelines and Experiments
