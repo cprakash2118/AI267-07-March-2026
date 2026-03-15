@@ -1,0 +1,244 @@
+
+# https://github.com/cprakash2118/AI267-07-March-2026
+
+Phase-01:-
+Unit-1- Introduction to Red Hat OpenShift AI (RHOAI)
+Unit-2- Date Science Project:-
+      - Data Science Project
+      - workbench
+      - Data Connection (Connectivity toward Object Storage - Object Bucket)
+Unit-3- jupyter Notebooks (Access file like .ipynb)
+Unit-4- Red Hat OpenShift AI Installation (Via Operator HUB/CLI).
+Unit-5- User and resources management (user, groups, RBAC, Managing Resources)
+Unit-6- Custom Notebook Images
+
+*****************
+ High-level RHOAI component architecture:-
+ https://www.redhat.com/en/products/ai/openshift-ai
+ 
+1-# Deployment Platform:-
+Bare Metal (PM,VM,Cloud Instance)
+
+RHOCP deployment (Main Product) + RHOAI deployment (Add-Ons):-
+6 node cluster 
+- 3 master nodes 
+- 3 worker nodes   [Socket Part]
+
+Socket * (Core per Socket) * (Thread per Core) 
+50 node (3 master 47 worker).
+10 nodes -> AI/ML 
+https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/installing_on_bare_metal/index
+https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.3/html/installing_and_uninstalling_openshift_ai_self-managed_in_a_disconnected_environment/index
+
+
+
+
+2-# Compute Accelerators:-
+- Compute Accelerators are specialized h/w devices - designed to seepd up heavy computaltinal workload -> AI/ML/HCP.
+
+Example:-
+ GPU (Graphhics Processing Unit) - NVIDIA A100/H100 
+ TPU (Tensor Processing Unit) - Google AI chips  
+ FPGA (Field Prgrammable Gate Array).
+ 
+ FYI- These devices are installed inside servers or attched to node in a OCP cluster.
+ 
+ 4 + 3 = 7 
+28934723987498237498327 + 98374983759843759834759873498
+
+ 2.1-# Faster Model Training.
+       Jupyter Notebook -> RHOAI workbench POD -> GPU node (NVIDIA A100, H100).
+ 2.2-# Large Scale Data Processing.
+       AI pipelines process TB-PB of datasets.
+	   
+	   Compute Accelerators enable:-
+	   - Faster Vector calculation 
+	   - Parallel COmputation 
+	   - Real-time data pre-processing 
+	   
+	   Example:- 
+	   Using Aapache Spark with GPUs in RHOAI 
+
+ 2.3-# Real-Time Model inference:-
+ 
+ 2.4-# Parallel Computing for Deep Learning.
+       Deep learning models contain millions or Billions of parameters.
+
+      - LLMs 
+      - CNN (Computer Vision).
+
+     Processor         Core         Best Use 
+      CPU 	           8-64         Geneal Compute 
+	  GPU              1000+        AI/ML training 
+
+ 2.5-# Efficient Resource Utilization in k8s.
+     RHOAI runs on Red Hat OpenShift
+	 
+	 Accelerators are exposed to Kubernetes using device plugins.
+     
+     Pod Request
+      resources:
+        limits:
+          nvidia.com/gpu: 1
+          cpu: 4000m                 (1 core = 1000m)
+        		  
+	FYI- Compute Accelerator Architecture in RHOAI.
+	  Data Scientist -> RHOAI workbench (Jupyter nodeBook) -> KubeFLow Pipleline -> GPU worker node -> Model Training
+	  
+	  Accelerators from NVIDIA or Intel.
+	  CPU=Brain 
+	  GPU= Thousands of mini brains working together.
+	  Compute Accelerator is very impt to play this role here.
+	  
+3-# Hybrid Cloud Platfrom:-
+     Cloud Edition (ROSA,ARO,Dedicated,IBM)
+	 Self-Managed  (RHOKE,RHOCP,RHOPP)
+	 
+	 RHOCP + RHOAI 
+	 RHOPP + RHOAI (20 RHOAI cluster) RHACM 
+
+
+----------------------------------------------------------------------------
+#POint-04####
+OPERATORS:-
+- Red Hat OpenShift AI operator.
+- NVIDIA GPU Operator
+- CodeFlare Operator
+- RedHat OpenShift ServiceMesh (Based on Istio Project).
+- RedHat openshift Severless Operator
+
+4.1######## Red Hat OpenShift AI operator.
+This operator install and manage the entire RHOAI platform inside "Red Hat OpenShift" - RHOCP 
+
+   - Data Science workbench
+   - Model serving 
+   - KubeFLow pipelines
+   - Distributed training 
+   - MOdel monitoring 
+   - Notebook env 
+   - AI dashboard 
+   FYI- Turns OCP cluster to AI/ML platform (RHOAI)   
+   
+Why it is used in RHOAI?
+  Without this operator, OpenShift is just like a Kubernetes Container Platform.
+  
+  RHOAI operator - What adds to OCP.
+  - ML development tools 
+  - AI model deployment frameworks.
+  - Data Science env 
+  - Model lifecycle mgmt.
+  
+  This operator provides AI platform layer on top of Enterpise Kubernetes.
+  
+  Components deployed once RHOAI operator installed.
+  - kubeflow 
+  - KServ 
+  - Jupyter nodeBook
+  - Data Science Pipleline
+  - MOdel Mesh 
+   etc 
+
+   
+#####- NVIDIA GPU Operator:-
+- This NVIDIA GPU Operator automates GPU enablement inside OCP cluster.
+- This Operator install and manages:-
+  - GPU drivers     - Hw support 
+  - CUDA libs       - GPU computing libs 
+  - Container Runtime Support 
+  - Devices Plugins    - Exposes GPU to k8s 
+  - GPU monitoring tools  - DCGM exporter 
+  - GPU feature Discovery  - Node capabilities detection 
+ 
+ 
+###### - CodeFlare Operator:-
+- CodeFlare is a framework for "Distributed Machine Learning" training on k8s.
+- It also help to scale ML workload across multiple nodes.
+- It integrates with K8s & GPUs 
+
+- Why it is used in RHOAI?
+  Training large AI model often required:-
+  - Multiple GPUs
+  - Multiple nodes 
+  - Parallel training
+  
+  FYI- CodeFlare orchestrates Distributed training.
+  
+
+####### RedHat OpenShift ServiceMesh (Based on Istio Project).
+- OpenShift Service Mesh provides secure service-to-service communication.
+ - Istio 
+ - Envoy proxy 
+ - Jaeger 
+ - Kiali 
+ FYI- It manage network communication between microservices.
+ 
+Why it is used in RHOAI.
+AI platform having many microservices:-
+- Model Servers.
+- pipeline
+- notebook 
+- data service.
+
+Service Mesh provides - Traffic COntrol, security, observability.
+
+#######- RedHat openshift Severless Operator:-
+- OpenShift Severless enable event-driven serverless application using Knative.
+  FYI- Application run only when needed and scale automatically.
+  
+Why it is used in RHOAI?
+- Most of AI workload are event-driven.
+
+
+Complete ROLE of these Operators in RHOAI:-
+     Operator                         Role in AI platform (RHOAI)
+1- OpenShift AI Operator   -       INstall full AI platform
+2- NVIDIA GPU Operator     -       GPU Acceleration 
+3- CodeFlare Operator      -       Distributed Training
+4- OpenShift Service Mesh  -       Secure service-to-service communication
+5- OpenShift Severless     -       Event-driven (Knative)
+
+#####################################################################################
+- Workbench Container Image:-
+  
+  OpenShift:- 
+  1- Build application outside and deploy within OpenShift
+  2- Build and Deploy application within OpenShift.
+  
+  Application (app/db) deployment:-
+  - IMage (Registry - quay.io)->  "Create Build"    <-Code (Repository - Git repo)
+  - Once Build ready then OCP deploy 
+    - ONce build ready then it will push to registry (internal registry - IS "ImageSteam").
+
+CUDA - "Compute Unified Device Architecture".
+It is NVIDIA's platform and programming model that let's software use an NVIDIA GPU (Not just of graphics, but for general-purpose computation part).
+
+- CPU => Good at doing a few things very smaertly and sequenentially.
+- GPU => Good at doing many semilar calculations at the same time.
+- CUDA => Software layer/library ecosystem that helps program to use NVIDIA GPUs for "Acceleration".
+
+FYI- CUDA is the technology stack that "allow developer and frameworks to offload heavy math work from the CPU to the NVIDIA GPU.
+
+FYI - Do not consider this a small libs, it's a very huge eecosystem which includings:-
+ - Programming model 
+ - Compiler tools 
+ - runtime env 
+ - drivers 
+ - math libraries 
+ - ML (deep learning) support libs 
+
+Main idea behind CUDA:- CUDA lets a programmer split work into two part.
+A- Host code 
+Runs on the CPU 
+
+B- Device code
+Runs on the GPU. 
+
+Example:-
+ - CPU sends suitable parallel tasks to GPU 
+ - GPU processes many opeartions simultaneously and return the outcome.
+
+NOte: Called offloading Computatoin to GPU.
+
+Where CUDA used in AI/ML 
+- PyTorch 
+- TensorFlow.  
