@@ -1,0 +1,196 @@
+Task-01-# 
+Day 0 -> Deployment 
+         (RHOCP - Red Hat OpenShift Container Platform) + Enabled Operators (5)
+Day 1 -> Configuration
+         Post deployment
+		 
+Day 2 -> Support
+         Handover to Production.
+
+Day 0:-	
+-------------
+- Design & SI 	
+- OCP installation (3 master node, 3 worker)
+- Operators installation via OperatorsHUB
+
+Day 1:-
+------------
+user1-5/redhat    IdP=Idp-htpasswd-SRE-team        Group=sre_grp         Access="cluster-admin"
+user6-10/redhat   IdP=Idp-htpasswd-AI-admin-team   Group=rhods-admins    Access="admin" only RHOAI dashboad).
+user10-20/redhat   IdP=Idp-htpasswd-DS-team          Group=ds_grp       Access="Member to only RHOAI dashboad).
+user10-20/redhat   IdP=Idp-htpasswd-ML-team          Group=ml_grp       Access="Member to only RHOAI dashboad).
+
+Workbench management (small,large etc - customization w.r.t resources)
+Setup PersistentVOlumeClaim (pvc) w.r.t Workbench - (Block/File Storage - RWO/RWX)
+Data COnnection w.r.t Workbench - Object STorage (RGW/MGC etc) 
+ - OBC & Bucket 
+ - Access to Bucket (Access,Secret keys; etc )
+- Pipeline setup 
+- Model Training 
+- Model serving 
+Jupyter nodebook up and Git connectivity 
+Image management 
+ 
+############################################
+file.ipynb 
+
+Import the required library
+Load or prepare data
+Split data into train and test
+Create the model
+Train the model
+Predict
+Evaluate
+Optionally save the model
+
+IMages:- 
+
+--------------
+Pandas -> Data Analysis Library (Python).
+Pandas is powerful python library used for data analysis, data manipulation etc.
+- It help to DS to load, clean, transform, analyze and visualize staructured data.
+Example:- 
+  CSV files
+  Excel file 
+  SQL tables
+  JSON data 
+  Time-series data 
+  
+- Most important tools in DS, ML, AI pipelines.
+- Pandas is build on top of NumPy, which provide fast numerical opeartions.
+
+# Core Data Structure in Pandas.
+Pandas mainly works with two staructures.
+1- Series - A series is like a single column in Excel.
+Example:-
+ Index       Value 
+ 0            10      
+ 1            20
+ 2            30
+ 3            40 
+ 
+Python Example:-
+ import pandas as pd 
+ data = pd.Series([10,20,30,40])
+ print(data)
+ 
+ 0 10 
+ 1 20
+ 2 30 
+ 3 40 
+ 
+2- Dataframe
+A Dataframe is like an Excel spreadsheet or SQL table.
+Example:-
+ 
+ Name      Age    City         Exp (years)
+ john      25     Bangalore     8 
+ Ravi      28     Delhi         12 
+ 
+ import pandas as pd 
+ data= {
+      "Name": ["john", "Ravi"],
+	  "Age": [25,30,28],
+	  "City": ["Bangalore","Delhi"]
+	  }
+  df = pd.DataFrame(data)
+  print (df)
+  
+    Name   Age    City 
+ 0  John   25    Bangalore
+ 1  Ravi   28    Delhi
+ 
+- MOst common Pandas opeartions:-
+1- REad Data:-
+ df = pd.read_csv("sales.csv")
+ 
+2- View Data 
+ df.head() 
+ First 5 rows 
+ 
+ df.tail()
+ Last 5 rows 
+
+3- Filter data
+Example: revenue > 2,00,000
+
+ df[df["Revenue"] > 200000]
+ 
+4- Calculate Statistics:-
+Avg = df["Revenue"].mean()
+
+
+5- Sort Data:-
+df.sort_values(by="Revenue", ascending=False)
+
+
+Example: AI pipelines using Pasdas 
+
+Data Source -> Pandas Data -> Feature Eng -> Machine Learning Model -> Prediction 
+csv -> pondas -> Train ML model -> Predict sales 
+
+========================================================================================
+PyTorch:-
+This is an Open-Source deep learning framework developed by Meta Platforms.
+Mainly used for what?
+ - Deep Learning
+ - Neural Networks
+ - NLP (Natural Language Processing)
+ 
+ 
+- Dynamic computation graph:- 
+Unlike older framework, PyTorch build models during execution.
+Example:-
+  If you change model structure -> It adapts instantly 
+
+- GPU acceleration:-
+ It works directly with NVIDIA GPUs using CUDA.
+ This is why traning Large neural networks becomes possible.
+
+- Python friendly 
+
+- Used heavily in AI:-
+  Many advance modles like GPT style architecture are often developed in PyTorch.
+  
+  
+Example: Image Classification.
+- cat  -> 723 , 123 , 34  
+- Dog  
+- Car 
+- Person 
+- mobile
+
+-1 Load Images dataset 
+-2 Convert images -> tensors 
+-3 Train neural network 
+-4 Predict outcome 
+
+
+import torch 
+import torch.nn as nn 
+
+model = nn.Sequential(
+        nn.Linear(723,123),
+		..
+		..
+    )
+	
+	input = torch.randn(1,723)
+	output = model(input)
+	
+	print(output)
+	
+	784 -> image pixels 
+	123 -> 
+
+
+====================
+TensorFlow -> Enterprise AI Framework 
+Scikit-learn (Traditional ML libs)
+
+
+Scikit-learn -> Traditional Machine Learning
+PyTorch      -> Deep Learning Research 
+TensorFlow   -> Enterprise AI Deployment 
+
+
